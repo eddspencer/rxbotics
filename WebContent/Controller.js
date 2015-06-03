@@ -6,14 +6,9 @@ function Controller(delay, frequency) {
 
 }
 
-function IRSensor() {
-	var sensorObservable = new Rx.BehaviorSubject('');
-	this.emitValue = function(value) {
-		sensorObservable.onNext;
-	}
-	this.subscribe = function(onNext) {
-		sensorObservable.subscribe(onNext);
-	}
+function Vector(x, y) {
+	this.x = x;
+	this.y = y;
 }
 
 /**
@@ -21,6 +16,12 @@ function IRSensor() {
  * will change the state
  */
 function Behaviour(readings) {
+
+	// TODO incorporate the location of the sensor and current direction and speed
+	// so will only stop when oject is infront of you
+
+	// TODO NEXT. Link up the whole thing like it is, it can stop whenever it gets
+	// close to something
 
 	function processEvent(sensorReadings) {
 		// TODO think of nicer way to do this
