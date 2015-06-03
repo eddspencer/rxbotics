@@ -38,12 +38,22 @@ function IRSensor() {
 	}
 }
 
-function Behaviour(sensor) {
-	this.output = sensor.map(function(reading) {
-		if (reading > 10) {
-			return 'STOP';
-		} else {
-			return 'OK';
+/**
+ * Takes inputs from multiple sensors and outputs messages to the system which
+ * will change the state
+ */
+function Behaviour(sensors) {
+	var readings = Rx.Observable.zipArray(sensors);
+
+	function processEvent(sensorReadings) {
+		var sensorCount = sensorReadings.length;
+		for (var i = 0; i < sensorCount; i++) {
+			if (sensorReadings[i] > 10) {
+				return 'STOP';
+			}
 		}
-	});
+		return 'OK';
+	}
+
+	this.output = readings.map(processEvent);
 }

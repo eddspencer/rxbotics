@@ -28,6 +28,7 @@ QUnit.test('IRSensor', function() {
 			onNext(350, 'OK'),
 			onNext(400, 'OK'),
 			onNext(450, 'STOP'),
-			onNext(500, 'STOP')
-	], onCompleted(600));
+			onNext(500, 'STOP'),
+			onCompleted(600)
+	]);
 });
