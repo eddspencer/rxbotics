@@ -3,28 +3,6 @@
  * TODO try to offline a whole bunch of the rxJS GIT page so can play on the train.
  */
 function Controller(delay, frequency) {
-	var source =
-			Rx.Observable.timer(delay, frequency).timeInterval().pluck('interval');
-
-	this.subscribe = function(onNext, onError, onComplete) {
-		return source.subscribe(onNext, onError, onComplete);
-	}
-
-	this.start = function() {
-		subscription = source.subscribe(function(x) {
-			console.log('Next: ' + x);
-		}, function(err) {
-			console.log('Error: ' + err);
-		}, function() {
-			console.log('Completed');
-		});
-	}
-
-	this.stop = function() {
-		if (null != subscription) {
-			subscription.dispose();
-		}
-	}
 
 }
 
@@ -42,10 +20,16 @@ function IRSensor() {
  * Takes inputs from multiple sensors and outputs messages to the system which
  * will change the state
  */
-function Behaviour(sensors) {
-	var readings = Rx.Observable.zipArray(sensors);
+function Behaviour(readings) {
 
 	function processEvent(sensorReadings) {
+		// TODO think of nicer way to do this
+		if (!Array.isArray(sensorReadings)) {
+			var arr = new Array(1);
+			arr[0] = sensorReadings;
+			sensorReadings = arr;
+		}
+
 		var sensorCount = sensorReadings.length;
 		for (var i = 0; i < sensorCount; i++) {
 			if (sensorReadings[i] > 10) {
