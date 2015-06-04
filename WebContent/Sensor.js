@@ -7,21 +7,21 @@
  * @param direction
  *          Direction sensor is facing
  */
-function Sensor(position, direction) {
-	this.position = position;
-	this.direction = direction;
+function Sensor(x, y, dx, dy) {
+	this.position = new Vector(x, y);
+	this.direction = new Vector(dx, dy);
 }
 
-Sensor.prototype.currentReadding = function() {
+Sensor.prototype.currentReading = function() {
 	return 0;
 }
 
 /**
- * IRSensor reads the IR signal from given input and converts it to 
- * a distance in mm
+ * IRSensor reads the IR signal from given input and converts it to a distance
+ * in mm
  */
-function IRSensor(position, direction) {
-	Sensor.call(this, position, direction);
+function IRSensor(x, y, dx, dy) {
+	Sensor.call(this, x, y, dx, dy);
 }
 
 IRSensor.prototype = Object.create(Sensor.prototype);
