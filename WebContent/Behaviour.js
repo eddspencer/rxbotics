@@ -3,6 +3,8 @@
  * will change the state
  */
 function Behaviour() {
+	
+	this.currentState = {};
 
 	// TODO incorporate the location of the sensor and current direction and speed
 	// so will only stop when oject is infront of you

@@ -1,9 +1,20 @@
 /*
  * Controller for robot, this defines the frequency to read inputs and links the reactions
  */
-function Controller(scheduler, sensors, initialBehaviour) {
+function Controller(config) {
 	var parent = this;
-	this.activeBehaviour = initialBehaviour;
+	
+	var currentState = {};
+	var scheduler = config.scheduler;
+	var sensors = config.sensors;
+	var driver = config.driver;
+	
+	setActiveBehaviour(config.initialBehaviour);
+	
+	function setActiveBehaviour(behaviour) {
+		parent.activeBehaviour = behaviour;
+		parent.activeBehaviour.currentState = currentState;
+	}
 
 	function processSensorReadings(interval) {
 		var sensorReadings = sensors.map(function(sensor) {
@@ -12,7 +23,18 @@ function Controller(scheduler, sensors, initialBehaviour) {
 		return parent.activeBehaviour.processReadings(sensorReadings);
 	}
 	
-	this.output = scheduler.map(processSensorReadings);
+	this.behaviourOutput = scheduler.map(processSensorReadings);
+	
+	// TODO maybe want the driver to handle the reading of event
+	function processBehaviourOutput(output) {
+		if ('STOP' == output) {
+			driver.stop();
+		} else {
+			driver.go();
+		}
+	}
+	
+	this.behaviourOutput.forEach(processBehaviourOutput);
 
 	// TODO:
 	// Takes a number of sensors

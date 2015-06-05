@@ -1,7 +1,7 @@
 /**
  * Tests the sensor class, mapping the input of the sensors to correct values
  */
-QUnit.module('Ssensor');
+QUnit.module('Sensor');
 
 var Observable = Rx.Observable;
 var TestScheduler = Rx.TestScheduler;

@@ -12,7 +12,12 @@ var onCompleted = Rx.ReactiveTest.onCompleted;
 function createResults(scheduler, xs) {
 	var sensors = [ new Sensor(0, 0, 0, 0), new Sensor(1, 1, 1, 1) ];
 	var results = scheduler.startWithCreate(function() {
-		return new Controller(xs, sensors, new Behaviour()).output;
+		return new Controller({
+			scheduler : xs,
+			sensors : sensors,
+			initialBehaviour : new Behaviour(),
+			driver : new Driver()
+		}).behaviourOutput;
 	});
 
 	return results;
