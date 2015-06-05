@@ -2,25 +2,28 @@
  * Controller for robot, this defines the frequency to read inputs and links the reactions
  */
 function Controller(config) {
-	var parent = this;
-	
+	var activeBehaviour;
 	var currentState = {};
+	
 	var scheduler = config.scheduler;
 	var sensors = config.sensors;
 	var driver = config.driver;
 	
 	setActiveBehaviour(config.initialBehaviour);
 	
+	this.currentState = currentState;
+	
 	function setActiveBehaviour(behaviour) {
-		parent.activeBehaviour = behaviour;
-		parent.activeBehaviour.currentState = currentState;
+		activeBehaviour = behaviour;
+		activeBehaviour.currentState = currentState;
 	}
 
 	function processSensorReadings(interval) {
+		currentState.time = interval;
 		var sensorReadings = sensors.map(function(sensor) {
 			return sensor.currentReading();
 		});
-		return parent.activeBehaviour.processReadings(sensorReadings);
+		return activeBehaviour.processReadings(sensorReadings);
 	}
 	
 	this.behaviourOutput = scheduler.map(processSensorReadings);
