@@ -1,7 +1,7 @@
 /*
  * Controller for robot, this defines the frequency to read inputs and links the reactions
  */
-function Controller(config) {
+var Controller = RxBotics.Controller = function(config) {
 	var activeBehaviour;
 	var currentState = {};
 	
@@ -38,15 +38,11 @@ function Controller(config) {
 	}
 	
 	this.behaviourOutput.forEach(processBehaviourOutput);
-
-	// TODO:
-	// Takes a number of sensors
-	// Defines a 'active behaviour'
-	// maps events from an observable throught the sensors and behaviour
-	// try to keep it as loosely coupled with observables as possible....think of
-	// separating out calls like 'getSensorReadings'
-	// needs to understand current state
 }
+
+// TODO need to link the wheel encoders (odometry) and have them update state with current position estimate
+// TODO have some extra actions you can run (like flash LED when on)
+// TODO We need a state machine to govern behaviour
 
 function Vector(x, y) {
 	this.x = x;

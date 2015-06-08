@@ -16,15 +16,15 @@ function testSensorInitialied(assert, sensor, expectedReading) {
 	assert.equal(2, sensor.direction.x);
 	assert.equal(3, sensor.direction.y);
 
-	assert.equal(expectedReading, sensor.currentReading(), "Dummy sensor always returns " + expectedReading);
+	assert.equal(sensor.currentReading(), expectedReading, "Dummy sensor always returns " + expectedReading);
 }
 
 QUnit.test('Sensor simple', function(assert) {
-	var sensor = new Sensor(0, 1, 2, 3);
+	var sensor = new RxBotics.Sensor(0, 1, 2, 3);
 	testSensorInitialied(assert, sensor, 0);
 });
 
 QUnit.test('IRSensor simple', function(assert) {
-	var sensor = new IRSensor(0, 1, 2, 3);
-	testSensorInitialied(assert, sensor, 99);
+	var sensor = new RxBotics.IRSensor(0, 1, 2, 3);
+	testSensorInitialied(assert, sensor, 0.6293);
 });

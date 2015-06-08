@@ -11,7 +11,7 @@ var onCompleted = Rx.ReactiveTest.onCompleted;
 
 function createBehaviour(scheduler, xs) {
 	var results = scheduler.startWithCreate(function() {
-		var behaviour = new Behaviour();
+		var behaviour = new RxBotics.Behaviour();
 		return xs.map(behaviour.processReadings);
 	});
 

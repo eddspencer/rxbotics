@@ -11,7 +11,7 @@ var onCompleted = Rx.ReactiveTest.onCompleted;
 
 QUnit.test('Driver start', function(assert) {
 	var state = {};
-	var driver = new Driver(state);
+	var driver = new RxBotics.Driver(state);
 	driver.go();
 	assert.equal(true, state.moving, "Driver should have updated state");
 });
@@ -19,7 +19,7 @@ QUnit.test('Driver start', function(assert) {
 
 QUnit.test('Driver stop', function(assert) {
 	var state = {};
-	var driver = new Driver(state);
+	var driver = new RxBotics.Driver(state);
 	driver.go();
 	driver.stop();
 	assert.equal(false, state.moving, "Driver should have updated state");

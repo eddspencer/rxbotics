@@ -20,12 +20,12 @@ function createResults(scheduler, controller) {
 QUnit.test('Controller happy path', function(assert) {
 	var scheduler = new TestScheduler();
 	var timings = createColdObservable(scheduler, [ 0, 1, 2, 3, 4 ]);
-	var sensors = [ new Sensor(0, 0, 0, 0), new Sensor(1, 1, 1, 1) ];
-	var controller = new Controller({
+	var sensors = [ new RxBotics.Sensor(0, 0, 0, 0), new RxBotics.Sensor(1, 1, 1, 1) ];
+	var controller = new RxBotics.Controller({
 		scheduler : timings,
 		sensors : sensors,
-		initialBehaviour : new Behaviour(),
-		driver : new Driver()
+		initialBehaviour : new RxBotics.Behaviour(),
+		driver : new RxBotics.Driver()
 	});
 	createResults(scheduler, controller).messages.assertEqual([
 			onNext(300, 'OK'),

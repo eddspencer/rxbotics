@@ -2,14 +2,16 @@
  * Takes inputs from multiple sensors and outputs messages to the system which
  * will change the state
  */
-function Behaviour() {
-	
+var Behaviour = RxBotics.Behaviour = function() {
+
 	this.currentState = {};
 
-	// TODO incorporate the location of the sensor and current direction and speed
+	// TODO incorporate the location of the sensor and current direction and
+	// speed
 	// so will only stop when oject is infront of you
 
-	// TODO NEXT. Link up the whole thing like it is, it can stop whenever it gets
+	// TODO NEXT. Link up the whole thing like it is, it can stop whenever it
+	// gets
 	// close to something
 }
 
