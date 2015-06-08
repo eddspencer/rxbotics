@@ -16,6 +16,25 @@ Sensor.prototype.currentReading = function() {
 	return 0;
 }
 
+// TODO make node module so can 'require' it for easy adding to project
+/*
+ *     b.analogRead('P9_33', function(x) { 
+        fl = x.value;
+    });
+    b.analogRead('P9_35', function(x) { 
+        bl = x.value;
+    });
+    b.analogRead('P9_36', function(x) { 
+        ff = x.value;
+    });   
+    b.analogRead('P9_38', function(x) { 
+        fr = x.value;
+    });
+    b.analogRead('P9_40', function(x) { 
+        br = x.value;
+    });
+ */
+
 /**
  * IRSensor reads the IR signal from given input and converts it to a distance
  * in meters
@@ -33,9 +52,9 @@ IRSensor.prototype.constructor = IRSensor;
 
 IRSensor.prototype.currentReading = function() {
 
-	// TODO Implement IRSensor using bonescript
-	var voltageADC = 0;
-	var voltage = voltageADC * 3 / 1000;
+	// TODO Restructure this so we can get raw values easily for debugging
+	var voltageADC = b.analogRead('P9_36');
+	var voltage = voltageADC * 3;
 	var distance = RxBoticsMath.polyval([ -0.0182, 0.1690, -0.6264, 1.1853, -1.2104, 0.6293 ], voltage);
 
 	return distance;

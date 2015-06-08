@@ -1,7 +1,7 @@
 /*
  * Controller for robot, this defines the frequency to read inputs and links the reactions
  */
-var Controller = RxBotics.Controller = function(config) {
+var Controller = RxBotics.Controller = (config) {
 	var activeBehaviour;
 	var currentState = {};
 	
