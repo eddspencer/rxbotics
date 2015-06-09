@@ -53,8 +53,8 @@ IRSensor.prototype.constructor = IRSensor;
 IRSensor.prototype.currentReading = function() {
 
 	// TODO Restructure this so we can get raw values easily for debugging
-	var voltageADC = b.analogRead('P9_36');
-	var voltage = voltageADC * 3;
+	var voltageADC = 0; //b.analogRead('P9_36');
+	var voltage = voltageADC * 3; // / 1000
 	var distance = RxBoticsMath.polyval([ -0.0182, 0.1690, -0.6264, 1.1853, -1.2104, 0.6293 ], voltage);
 
 	return distance;
