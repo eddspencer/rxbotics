@@ -1,4 +1,4 @@
-var RxBoticsMath = RxBotics.Math = {
+var RxBoticsMath = module.exports = {
 
 	/**
 	 * Computes the result of polynomial p(x) using:
@@ -21,5 +21,10 @@ var RxBoticsMath = RxBotics.Math = {
 		}
 
 		return y;
+	},
+
+	Vector : function(x, y) {
+		this.x = x;
+		this.y = y;
 	}
 }

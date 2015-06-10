@@ -2,7 +2,7 @@
  * Takes inputs from multiple sensors and outputs messages to the system which
  * will change the state
  */
-var Behaviour = RxBotics.Behaviour = function() {
+var Behaviour = module.exports = function() {
 
 	this.currentState = {};
 
