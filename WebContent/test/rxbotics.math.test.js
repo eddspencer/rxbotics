@@ -1,12 +1,16 @@
 /**
  * Tests the maths class
  */
-QUnit.module('RxBoticsMath');
+var expect = require('chai').expect;
+var RxBotics = require('rxbotics');
 
-QUnit.test('Polyval test order 0', function(assert) {
-	assert.equal(RxBotics.Math.polyval([ 3 ], 2), 3);
-});
-
-QUnit.test('Polyval test order 3', function(assert) {
-	assert.equal(RxBotics.Math.polyval([ 2, 4, 5 ], 2), 21);
+describe('RxBotics.Math', function() {
+	describe('Polyval', function() {
+		it('should work order 0', function() {
+			expect(RxBotics.Math.polyval([ 3 ], 2)).to.equal(3);
+		});
+		it('should work order 3', function() {
+			expect(RxBotics.Math.polyval([ 2, 4, 5 ], 2)).to.equal(21);
+		});
+	})
 });

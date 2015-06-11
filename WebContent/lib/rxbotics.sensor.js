@@ -1,5 +1,5 @@
-RxBoticsMath = require('./rxbotics.math.js');
-Vector = RxBoticsMath.Vector;
+var RxBoticsMath = require('./rxbotics.math.js');
+var Vector = RxBoticsMath.Vector;
 
 /**
  * Reads information from a sensor, implement the currentReading function to get

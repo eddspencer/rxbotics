@@ -1,30 +1,21 @@
 /**
  * Tests the sensor class, mapping the input of the sensors to correct values
  */
-QUnit.module('Sensor');
+var expect = require('chai').expect;
+var RxBotics = require('rxbotics');
 
-var Observable = Rx.Observable;
-var TestScheduler = Rx.TestScheduler;
-var onNext = Rx.ReactiveTest.onNext;
-var onError = Rx.ReactiveTest.onError;
-var onCompleted = Rx.ReactiveTest.onCompleted;
+function testSensorInitialied(sensor, expectedReading) {
+	expect(sensor.position.x).equals(0);
+	expect(sensor.position.y).equals(1);
+	expect(sensor.direction.x).equals(2);
+	expect(sensor.direction.y).equals(3);
 
-function testSensorInitialied(assert, sensor, expectedReading) {
-
-	assert.equal(0, sensor.position.x);
-	assert.equal(1, sensor.position.y);
-	assert.equal(2, sensor.direction.x);
-	assert.equal(3, sensor.direction.y);
-
-	assert.equal(sensor.currentReading(), expectedReading, "Dummy sensor always returns " + expectedReading);
+	expect(sensor.currentReading()).equals(expectedReading);
 }
 
-QUnit.test('Sensor simple', function(assert) {
-	var sensor = new RxBotics.Sensor(0, 1, 2, 3);
-	testSensorInitialied(assert, sensor, 0);
-});
-
-QUnit.test('IRSensor simple', function(assert) {
-	var sensor = new RxBotics.IRSensor(0, 1, 2, 3);
-	testSensorInitialied(assert, sensor, 0.6293);
+describe('RxBotics.Sensor', function() {
+	it('should work', function() {
+		var sensor = new RxBotics.Sensor(0, 1, 2, 3);
+		testSensorInitialied(sensor, 0.6293);
+	});
 });
