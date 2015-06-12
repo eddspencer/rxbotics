@@ -18,7 +18,7 @@ var Motor = function(dirPin1, dirPin2, pwmPin) {
 			b.digitalWrite(dirPin2, dir2);
 
 			// PWM value must be between 0 and 1
-			b.analogWrite(pwmPin, RxBotics.Math.costrain(Math.abs(pwm), 0, 1));
+			b.analogWrite(pwmPin, RxBotics.Math.constrain(Math.abs(pwm), 0, 1));
 		}
 
 		if (value > 0) {
