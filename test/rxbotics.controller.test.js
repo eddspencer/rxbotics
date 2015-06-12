@@ -5,7 +5,11 @@ var expect = require('chai').expect;
 var RxBotics = require('rxbotics');
 var Rx = require('rx');
 
+var Controller = RxBotics.Controller;
+var Sensor = RxBotics.Sensor;
 var Behaviour = RxBotics.Behaviour;
+var Driver = RxBotics.Driver;
+var Mock = RxBotics.Mock;
 
 var Observable = Rx.Observable;
 var TestScheduler = Rx.TestScheduler;
@@ -63,12 +67,29 @@ function checkObserverResult(actual, expected) {
 describe('RxBotics.Controller', function() {
 	var scheduler = new TestScheduler();
 	var timings = createColdObservable(scheduler, [ 0, 1, 2, 3, 4 ]);
-	var sensors = [ new RxBotics.Sensor(0, 0, 0, 0), new RxBotics.Sensor(1, 1, 1, 1) ];
-	var controller = new RxBotics.Controller({
+
+	var sensors = [ new Sensor({
+		x : 0,
+		y : 0,
+		dx : 0,
+		dy : 0,
+		calibration : [ 42 ]
+	}), new Sensor({
+		x : 1,
+		y : 1,
+		dx : 1,
+		dy : 1,
+		calibration : [ 42 ]
+	}) ];
+	
+	var controller = new Controller({
 		scheduler : timings,
 		sensors : sensors,
-		initialBehaviour : new RxBotics.Behaviour(),
-		driver : new RxBotics.Driver()
+		initialBehaviour : new Behaviour(),
+		driver : new Driver({
+			leftMotor : new Mock.Motor(),
+			rightMotor : new Mock.Motor()
+		})
 	});
 
 	it('should return value from behaviour', function() {

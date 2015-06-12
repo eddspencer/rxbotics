@@ -3,19 +3,29 @@
  */
 var expect = require('chai').expect;
 var RxBotics = require('rxbotics');
+
 var Driver = RxBotics.Driver;
+var Mock = RxBotics.Mock;
 
 describe('RxBotics.Driver', function() {
 	var state = {};
-	var driver = new Driver(state);
+
+	var leftMotor = new Mock.Motor();
+	var rightMotor = new Mock.Motor();
+	var driver = new Driver({
+		leftMotor : leftMotor,
+		rightMotor : rightMotor
+	});
 
 	it('should start', function() {
 		driver.go();
-		expect(state.moving).equals(true);
+		expect(leftMotor.speed).to.equal(0.5);
+		expect(rightMotor.speed).to.equal(0.5);
 	});
-	
+
 	it('should stop', function() {
 		driver.stop();
-		expect(state.moving).equals(false);
+		expect(leftMotor.speed).to.equal(0);
+		expect(rightMotor.speed).to.equal(0);
 	});
 });

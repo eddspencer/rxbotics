@@ -15,7 +15,13 @@ function testSensorInitialied(sensor, expectedReading) {
 
 describe('RxBotics.Sensor', function() {
 	it('should work', function() {
-		var sensor = new RxBotics.Sensor(0, 1, 2, 3);
-		testSensorInitialied(sensor, 0.6293);
+		var sensor = new RxBotics.Sensor({
+			x : 0,
+			y : 1,
+			dx : 2,
+			dy : 3,
+			calibration : [ 42 ]
+		});
+		testSensorInitialied(sensor, 42);
 	});
 });
