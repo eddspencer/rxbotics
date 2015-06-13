@@ -81,7 +81,7 @@ describe('RxBotics.Controller', function() {
 		dy : 1,
 		calibration : [ 42 ]
 	}) ];
-	
+
 	var controller = new Controller({
 		scheduler : timings,
 		sensors : sensors,
@@ -102,7 +102,11 @@ describe('RxBotics.Controller', function() {
 				onCompleted(550) ]);
 	});
 
-	it('should update current time', function() {
-		expect(controller.currentState.time).equals(4);
+	it('should update state with current time', function() {
+		expect(controller.currentState.time).to.equal(4);
+	});
+
+	it('should update state with sensorReadings', function() {
+		expect(controller.currentState.sensorReadings).to.deep.equal([ 42, 42 ]);
 	});
 });

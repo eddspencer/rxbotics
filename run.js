@@ -2,6 +2,11 @@ var RxBotics = require('rxbotics');
 var Rx = require('rx');
 var b = require('bonescript');
 
+var Controller = RxBotics.Controller;
+var Sensor = RxBotics.Sensor;
+var Behaviour = RxBotics.Behaviour;
+var Driver = RxBotics.Driver;
+
 var Motor = function(dirPin1, dirPin2, pwmPin) {
 
 	function initialisePins() {
@@ -56,11 +61,14 @@ var sensors = [ frSensor, flSensor, ffSensor, brSensor, blSensor ];
 
 var scheduler = Rx.Observable.interval(500).timeInterval().take(10);
 
-var controller = new RxBotics.Controller({
+var controller = new Controller({
 	scheduler : scheduler,
 	sensors : sensors,
-	initialBehaviour : new RxBotics.Behaviour(),
-	driver : new RxBotics.Driver()
+	initialBehaviour : new Behaviour(),
+	driver : new Driver({
+		leftMotor : new Motor('P8_14', 'P8_16', 'P9_16'),
+		rightMotor : new Motor('P8_12', 'P8_10', 'P9_14')
+	})
 });
 
 controller.behaviourOutput.forEach(function(x) {
