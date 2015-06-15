@@ -36,6 +36,12 @@ var Motor = function(dirPin1, dirPin2, pwmPin) {
 	}
 }
 
+var Encoder = function(pin) {
+	this.voltageReading = function() {
+		return b.analogRead(pin);
+	}
+}
+
 var IRSensor = function(x, y, dx, dy, pin) {
 	var sensor = new Sensor({
 		x : x,
@@ -67,8 +73,10 @@ var controller = new Controller({
 	initialBehaviour : new Behaviour(),
 	driver : new Driver({
 		leftMotor : new Motor('P8_14', 'P8_16', 'P9_16'),
-		rightMotor : new Motor('P8_12', 'P8_10', 'P9_14')
-	})
+		rightMotor : new Motor('P8_12', 'P8_10', 'P9_14'),
+		leftEncoder : new Encoder("P9_39"),
+		righhtEncoder : new Encoder("P9_37")
+	}),
 });
 
 controller.behaviourOutput.forEach(function(x) {

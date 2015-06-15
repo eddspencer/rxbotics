@@ -14,7 +14,9 @@ describe('RxBotics.Driver', function() {
 	var rightMotor = new Mock.Motor();
 	var driver = new Driver({
 		leftMotor : leftMotor,
-		rightMotor : rightMotor
+		rightMotor : rightMotor,
+		leftEncoder: new Mock.Encoder(),
+		rightEncoder: new Mock.Encoder()
 	});
 
 	it('should start', function() {
