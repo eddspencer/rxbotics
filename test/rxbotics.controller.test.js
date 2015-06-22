@@ -69,16 +69,16 @@ describe('RxBotics.Controller', function() {
 	var timings = createColdObservable(scheduler, [ 0, 1, 2, 3, 4 ]);
 
 	var sensors = [ new Sensor({
+		id : 'Test1',
 		x : 0,
 		y : 0,
-		dx : 0,
-		dy : 0,
+		theta : Math.PI / 2,
 		calibration : [ 42 ]
 	}), new Sensor({
+		id : 'Test2',
 		x : 1,
 		y : 1,
-		dx : 1,
-		dy : 1,
+		theta : Math.PI,
 		calibration : [ 42 ]
 	}) ];
 
@@ -107,6 +107,16 @@ describe('RxBotics.Controller', function() {
 	});
 
 	it('should update state with sensorReadings', function() {
-		expect(controller.currentState.sensorReadings).to.deep.equal([ 42, 42 ]);
+		var expectedReading = sensors.map(function(sensor) {
+			return {
+				id : sensor.id,
+				x : sensor.position.x,
+				y : sensor.position.y,
+				theta : sensor.theta,
+				distance : sensor.calibration[0]
+			};
+		});
+		expect(controller.currentState.sensorReadings).to.deep.equal(expectedReading);
 	});
+
 });
