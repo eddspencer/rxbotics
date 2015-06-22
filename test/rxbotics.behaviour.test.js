@@ -6,7 +6,9 @@ var RxBotics = require('rxbotics');
 var Behaviour = RxBotics.Behaviour;
 
 function process(sensorReadings) {
-	return new Behaviour().processReadings(sensorReadings);
+	return new Behaviour().processReadings({
+		sensorReadings : sensorReadings
+	});
 }
 
 describe('RxBotics.Behaviour', function() {

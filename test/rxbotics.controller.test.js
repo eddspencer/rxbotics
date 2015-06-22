@@ -85,10 +85,10 @@ describe('RxBotics.Controller', function() {
 	var controller = new Controller({
 		scheduler : timings,
 		sensors : sensors,
+		encoders : [ new Mock.Encoder(), new Mock.Encoder() ],
 		initialBehaviour : new Behaviour(),
 		driver : new Driver({
-			leftMotor : new Mock.Motor(),
-			rightMotor : new Mock.Motor()
+			motors : [ new Mock.Motor(), new Mock.Motor() ]
 		})
 	});
 
@@ -108,15 +108,10 @@ describe('RxBotics.Controller', function() {
 
 	it('should update state with sensorReadings', function() {
 		var expectedReading = sensors.map(function(sensor) {
-			return {
-				id : sensor.id,
-				x : sensor.position.x,
-				y : sensor.position.y,
-				theta : sensor.theta,
-				distance : sensor.calibration[0]
-			};
+			return sensor.currentState();
 		});
 		expect(controller.currentState.sensorReadings).to.deep.equal(expectedReading);
 	});
+	
 
 });
