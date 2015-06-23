@@ -99,14 +99,14 @@ describe('RxBotics.Controller', function() {
 		var expectedReading = sensors.map(function(sensor) {
 			return sensor.currentState();
 		});
-		expect(controller.currentState.sensorReadings).to.deep.equal(expectedReading);
+		expect(controller.currentState.sensors).to.deep.equal(expectedReading);
 	});
 
 	it('should update state with encoderReadings', function() {
 		var expectedReading = encoders.map(function(encoder) {
 			return encoder.currentState();
 		});
-		expect(controller.currentState.encoderReadings).to.deep.equal(expectedReading);
+		expect(controller.currentState.encoders).to.deep.equal(expectedReading);
 	});
 
 });
