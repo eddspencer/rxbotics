@@ -68,24 +68,13 @@ describe('RxBotics.Controller', function() {
 	var scheduler = new TestScheduler();
 	var timings = createColdObservable(scheduler, [ 0, 1, 2, 3, 4 ]);
 
-	var sensors = [ new Sensor({
-		id : 'Test1',
-		x : 0,
-		y : 0,
-		theta : Math.PI / 2,
-		calibration : [ 42 ]
-	}), new Sensor({
-		id : 'Test2',
-		x : 1,
-		y : 1,
-		theta : Math.PI,
-		calibration : [ 42 ]
-	}) ];
+	var sensors = [ new Mock.Sensor('Test1', 0, 0, Math.PI / 2, [ 42 ]), new Mock.Sensor('Test2', 1, 1, Math.PI, [ 42 ]) ];
+	var encoders = [ new Mock.Encoder(), new Mock.Encoder() ];
 
 	var controller = new Controller({
 		scheduler : timings,
 		sensors : sensors,
-		encoders : [ new Mock.Encoder(), new Mock.Encoder() ],
+		encoders : encoders,
 		initialBehaviour : new Behaviour(),
 		driver : new Driver({
 			motors : [ new Mock.Motor(), new Mock.Motor() ]
@@ -112,6 +101,12 @@ describe('RxBotics.Controller', function() {
 		});
 		expect(controller.currentState.sensorReadings).to.deep.equal(expectedReading);
 	});
-	
+
+	it('should update state with encoderReadings', function() {
+		var expectedReading = encoders.map(function(encoder) {
+			return encoder.currentState();
+		});
+		expect(controller.currentState.encoderReadings).to.deep.equal(expectedReading);
+	});
 
 });
