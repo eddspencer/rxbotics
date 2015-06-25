@@ -72,8 +72,8 @@ var brSensor = new IRSensor('BR', 0, 0, 0, 'P9_38');
 var blSensor = new IRSensor('BL', 0, 0, Math.PI, 'P9_40');
 var sensors = [ frSensor, flSensor, ffSensor, brSensor, blSensor ];
 
-var leftEncoder = new WheelEncoder('L', "P9_39");
-var rightEncoder = new WheelEncoder('R', "P9_37");
+var leftEncoder = new WheelEncoder('L', 'P9_39');
+var rightEncoder = new WheelEncoder('R', 'P9_37');
 var encoders = [ leftEncoder, rightEncoder ];
 
 var scheduler = Rx.Observable.interval(500).timeInterval().take(10);
